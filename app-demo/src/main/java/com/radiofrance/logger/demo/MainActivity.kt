@@ -14,16 +14,32 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        methodContainingLogs()
-    }
-
-    private fun methodContainingLogs() {
         logv()
-        logv("logv with message")
-        logv("LOG_TAG", "logv with makeLogTag and message")
-        logv("logv message and exception", Exception("Exception message"))
-        logv("LOG_TAG", "logv with makeLogTag, message and exception", Exception("Exception message"))
+        // Logcat output : "V/MainActivity::onCreate:: :"
 
+        logv("logv with message")
+        // Logcat output : "V/MainActivity::onCreate:: logv with message"
+
+        logv("LOG_TAG", "logv with makeLogTag and message")
+        // Logcat output : "V/LOG_TAG: logv with makeLogTag and message"
+
+        logv("logv message and exception", Exception("Exception message"))
+        // Logcat output : "V/MainActivity::onCreate:: logv message and exception
+        //    java.lang.Exception: Exception message
+        //        at com.radiofrance.logger.demo.MainActivity.onCreate(MainActivity.kt:20)
+        //        at android.app.Activity.performCreate(Activity.java:6679)
+        //        at android.app.Instrumentation.callActivityOnCreate(Instrumentation.java:1118)
+        //        at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:2618)"
+
+        logv("LOG_TAG", "logv with makeLogTag, message and exception", Exception("Exception message"))
+        // Logcat output : "V/LOG_TAG:: logv message and exception
+        //    java.lang.Exception: Exception message
+        //        at com.radiofrance.logger.demo.MainActivity.onCreate(MainActivity.kt:20)
+        //        at android.app.Activity.performCreate(Activity.java:6679)
+        //        at android.app.Instrumentation.callActivityOnCreate(Instrumentation.java:1118)
+        //        at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:2618)"
+
+        // Logs on other levels
         logd()
         logd("logd with message")
         logd("LOG_TAG", "logd with makeLogTag and message")
@@ -48,4 +64,5 @@ class MainActivity : AppCompatActivity() {
         loge("loge message and exception", Exception("Exception message"))
         loge("LOG_TAG", "loge with makeLogTag, message and exception", Exception("Exception message"))
     }
+
 }
