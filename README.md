@@ -27,7 +27,7 @@ dependencies {
 
 *Exemple* 
 - `No Operation` for `Release` variant
-- `Verbose` for `Debug variant.
+- `Verbose` for `Debug` variant.
 
 ```gradle
 dependencies {
