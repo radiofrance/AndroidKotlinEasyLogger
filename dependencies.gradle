@@ -1,0 +1,15 @@
+ext {
+    configCompileSdkVersion = 29
+    configMinSdkVersion = 17
+    configTargetSdkVersion = 29
+
+    buildDependencies = [
+            kotlin                  : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${kotlin_version}",
+            androidxAppcompat       : "androidx.appcompat:appcompat:1.1.0",
+    ]
+
+    testDependencies = [
+            junit                  : "junit:junit:4.12",
+            robolectric            : 'org.robolectric:robolectric:4.3',
+    ]
+}

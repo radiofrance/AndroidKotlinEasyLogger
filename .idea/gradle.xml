@@ -9,7 +9,15 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app-demo" />
+            <option value="$PROJECT_DIR$/log-debug" />
+            <option value="$PROJECT_DIR$/log-error" />
+            <option value="$PROJECT_DIR$/log-info" />
+            <option value="$PROJECT_DIR$/log-noop" />
+            <option value="$PROJECT_DIR$/log-verbose" />
+            <option value="$PROJECT_DIR$/log-warning" />
             <option value="$PROJECT_DIR$/logger" />
+            <option value="$PROJECT_DIR$/test-utils-data" />
+            <option value="$PROJECT_DIR$/test-utils-stream" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

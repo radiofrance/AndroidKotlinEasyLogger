@@ -1,21 +1,24 @@
-@file:Suppress("NOTHING_TO_INLINE")
+package com.radiofrance.logger
 
-package fr.radiofrance.logger
-
+import android.os.Build
 import android.util.Log
-import com.radiofrance.logger.BuildConfig
 
-inline fun tag() =
-    Thread.currentThread().stackTrace
-        .first { it.fileName.endsWith(".kt") }
-        .let { stack -> "${stack.fileName.removeSuffix(".kt")}::${stack.methodName}:" }
+val LOG_TAG_MAX_LENGTH = if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.N) 23 else 100
+const val DEFAULT_TAG = "DefaultLogTag"
+
+internal fun makeLogTag(stackTrace: Array<StackTraceElement>? = Thread.currentThread().stackTrace) =
+    stackTrace
+        ?.firstOrNull { it.fileName != "VMStack.java" && it.fileName != "Thread.java" && it.fileName != "LogInline.kt"}
+        ?.let { stack -> "${stack.className.split(".").last().split("$").first()}::${stack.methodName}:" }
+        ?.take(LOG_TAG_MAX_LENGTH)
+        ?: DEFAULT_TAG
 
 /**
  * Send a [.VERBOSE] log message.
  *
  * @param msg The message you would like logged.
  */
-inline fun logv(msg: String? = ":") = log(Log.VERBOSE, tag(), msg, null)
+fun logv(msg: String? = ":") = log(Log.VERBOSE, null, msg, null)
 
 /**
  * Send a [.VERBOSE] log message.
@@ -23,7 +26,7 @@ inline fun logv(msg: String? = ":") = log(Log.VERBOSE, tag(), msg, null)
  * @param tag Used to identify the source of a log message. It usually identifies the class or activity where the log call occurs.
  * @param msg The message you would like logged.
  */
-inline fun logv(tag: String, msg: String) = log(Log.VERBOSE, tag, msg, null)
+fun logv(tag: String, msg: String) = log(Log.VERBOSE, tag, msg, null)
 
 /**
  * Send a [.VERBOSE] log message and log the exception.
@@ -31,7 +34,7 @@ inline fun logv(tag: String, msg: String) = log(Log.VERBOSE, tag, msg, null)
  * @param msg The message you would like logged.
  * @param tr An exception to log
  */
-inline fun logv(msg: String, tr: Throwable) = log(Log.VERBOSE, tag(), msg, tr)
+fun logv(msg: String, tr: Throwable) = log(Log.VERBOSE, null, msg, tr)
 
 /**
  * Send a [.VERBOSE] log message and log the exception.
@@ -40,14 +43,14 @@ inline fun logv(msg: String, tr: Throwable) = log(Log.VERBOSE, tag(), msg, tr)
  * @param msg The message you would like logged.
  * @param tr An exception to log
  */
-inline fun logv(tag: String, msg: String, tr: Throwable) = log(Log.VERBOSE, tag, msg, tr)
+fun logv(tag: String, msg: String, tr: Throwable) = log(Log.VERBOSE, tag, msg, tr)
 
 /**
  * Send a [.DEBUG] log message.
  *
  * @param msg The message you would like logged.
  */
-inline fun logd(msg: String? = ":") = log(Log.DEBUG, tag(), msg, null)
+fun logd(msg: String? = ":") = log(Log.DEBUG, null, msg, null)
 
 /**
  * Send a [.DEBUG] log message.
@@ -55,7 +58,7 @@ inline fun logd(msg: String? = ":") = log(Log.DEBUG, tag(), msg, null)
  * @param tag Used to identify the source of a log message. It usually identifies the class or activity where the log call occurs.
  * @param msg The message you would like logged.
  */
-inline fun logd(tag: String, msg: String) = log(Log.DEBUG, tag, msg, null)
+fun logd(tag: String, msg: String) = log(Log.DEBUG, tag, msg, null)
 
 /**
  * Send a [.DEBUG] log message and log the exception.
@@ -63,7 +66,7 @@ inline fun logd(tag: String, msg: String) = log(Log.DEBUG, tag, msg, null)
  * @param msg The message you would like logged.
  * @param tr An exception to log
  */
-inline fun logd(msg: String, tr: Throwable) = log(Log.DEBUG, tag(), msg, tr)
+fun logd(msg: String, tr: Throwable) = log(Log.DEBUG, null, msg, tr)
 
 /**
  * Send a [.DEBUG] log message and log the exception.
@@ -72,14 +75,14 @@ inline fun logd(msg: String, tr: Throwable) = log(Log.DEBUG, tag(), msg, tr)
  * @param msg The message you would like logged.
  * @param tr An exception to log
  */
-inline fun logd(tag: String, msg: String, tr: Throwable) = log(Log.DEBUG, tag, msg, tr)
+fun logd(tag: String, msg: String, tr: Throwable) = log(Log.DEBUG, tag, msg, tr)
 
 /**
  * Send a [.INFO] log message.
  *
  * @param msg The message you would like logged.
  */
-inline fun logi(msg: String? = ":") = log(Log.INFO, tag(), msg, null)
+fun logi(msg: String? = ":") = log(Log.INFO, null, msg, null)
 
 /**
  * Send a [.INFO] log message.
@@ -87,7 +90,7 @@ inline fun logi(msg: String? = ":") = log(Log.INFO, tag(), msg, null)
  * @param tag Used to identify the source of a log message. It usually identifies the class or activity where the log call occurs.
  * @param msg The message you would like logged.
  */
-inline fun logi(tag: String, msg: String) = log(Log.INFO, tag, msg, null)
+fun logi(tag: String, msg: String) = log(Log.INFO, tag, msg, null)
 
 /**
  * Send a [.INFO] log message and log the exception.
@@ -95,7 +98,7 @@ inline fun logi(tag: String, msg: String) = log(Log.INFO, tag, msg, null)
  * @param msg The message you would like logged.
  * @param tr An exception to log
  */
-inline fun logi(msg: String, tr: Throwable) = log(Log.INFO, tag(), msg, tr)
+fun logi(msg: String, tr: Throwable) = log(Log.INFO, null, msg, tr)
 
 /**
  * Send a [.INFO] log message and log the exception.
@@ -104,14 +107,14 @@ inline fun logi(msg: String, tr: Throwable) = log(Log.INFO, tag(), msg, tr)
  * @param msg The message you would like logged.
  * @param tr An exception to log
  */
-inline fun logi(tag: String, msg: String, tr: Throwable) = log(Log.INFO, tag, msg, tr)
+fun logi(tag: String, msg: String, tr: Throwable) = log(Log.INFO, tag, msg, tr)
 
 /**
  * Send a [.WARN] log message.
  *
  * @param msg The message you would like logged.
  */
-inline fun logw(msg: String? = ":") = log(Log.WARN, tag(), msg, null)
+fun logw(msg: String? = ":") = log(Log.WARN, null, msg, null)
 
 /**
  * Send a [.WARN] log message.
@@ -119,7 +122,7 @@ inline fun logw(msg: String? = ":") = log(Log.WARN, tag(), msg, null)
  * @param tag Used to identify the source of a log message. It usually identifies the class or activity where the log call occurs.
  * @param msg The message you would like logged.
  */
-inline fun logw(tag: String, msg: String) = log(Log.WARN, tag, msg, null)
+fun logw(tag: String, msg: String) = log(Log.WARN, tag, msg, null)
 
 /**
  * Send a [.WARN] log message and log the exception.
@@ -127,7 +130,7 @@ inline fun logw(tag: String, msg: String) = log(Log.WARN, tag, msg, null)
  * @param msg The message you would like logged.
  * @param tr An exception to log
  */
-inline fun logw(msg: String, tr: Throwable) = log(Log.WARN, tag(), msg, tr)
+fun logw(msg: String, tr: Throwable) = log(Log.WARN, null, msg, tr)
 
 /**
  * Send a [.WARN] log message and log the exception.
@@ -136,14 +139,14 @@ inline fun logw(msg: String, tr: Throwable) = log(Log.WARN, tag(), msg, tr)
  * @param msg The message you would like logged.
  * @param tr An exception to log
  */
-inline fun logw(tag: String, msg: String, tr: Throwable) = log(Log.WARN, tag, msg, tr)
+fun logw(tag: String, msg: String, tr: Throwable) = log(Log.WARN, tag, msg, tr)
 
 /**
  * Send a [.ERROR] log message.
  *
  * @param msg The message you would like logged.
  */
-inline fun loge(msg: String? = ":") = log(Log.ERROR, tag(), msg, null)
+fun loge(msg: String? = ":") = log(Log.ERROR, null, msg, null)
 
 /**
  * Send a [.ERROR] log message.
@@ -151,7 +154,7 @@ inline fun loge(msg: String? = ":") = log(Log.ERROR, tag(), msg, null)
  * @param tag Used to identify the source of a log message. It usually identifies the class or activity where the log call occurs.
  * @param msg The message you would like logged.
  */
-inline fun loge(tag: String, msg: String) = log(Log.ERROR, tag, msg, null)
+fun loge(tag: String, msg: String) = log(Log.ERROR, tag, msg, null)
 
 /**
  * Send a [.ERROR] log message and log the exception.
@@ -159,7 +162,7 @@ inline fun loge(tag: String, msg: String) = log(Log.ERROR, tag, msg, null)
  * @param msg The message you would like logged.
  * @param tr An exception to log
  */
-inline fun loge(msg: String, tr: Throwable) = log(Log.ERROR, tag(), msg, tr)
+fun loge(msg: String, tr: Throwable) = log(Log.ERROR, null, msg, tr)
 
 /**
  * Send a [.ERROR] log message and log the exception.
@@ -168,7 +171,7 @@ inline fun loge(msg: String, tr: Throwable) = log(Log.ERROR, tag(), msg, tr)
  * @param msg The message you would like logged.
  * @param tr An exception to log
  */
-inline fun loge(tag: String, msg: String, tr: Throwable) = log(Log.ERROR, tag, msg, tr)
+fun loge(tag: String, msg: String, tr: Throwable) = log(Log.ERROR, tag, msg, tr)
 
 /**
  * Send a [.DEBUG] log message and log the exception.
@@ -178,16 +181,18 @@ inline fun loge(tag: String, msg: String, tr: Throwable) = log(Log.ERROR, tag, m
  * @param msg The message you would like logged.
  * @param tr An exception to log
  */
-inline fun log(level: Int, tag: String, msg: String? = ":", tr: Throwable?): Int {
-    if (level < BuildConfig.LOG_LEVEL) {
+private fun log(level: Int, tag: String?, msg: String? = ":", tr: Throwable?): Int {
+    if (level < LogConfig.getLevel()) {
         return -1
     }
+    val tagNonNull = tag ?: makeLogTag()
     return when (level) {
-        Log.VERBOSE -> Log.v(tag, msg, tr)
-        Log.DEBUG -> Log.d(tag, msg, tr)
-        Log.INFO -> Log.i(tag, msg, tr)
-        Log.WARN -> Log.w(tag, msg, tr)
-        Log.ERROR -> Log.e(tag, msg, tr)
+        Log.VERBOSE -> Log.v(tagNonNull, msg, tr)
+        Log.DEBUG -> Log.d(tagNonNull, msg, tr)
+        Log.INFO -> Log.i(tagNonNull, msg, tr)
+        Log.WARN -> Log.w(tagNonNull, msg, tr)
+        Log.ERROR -> Log.e(tagNonNull, msg, tr)
         else -> -1
     }
 }
+

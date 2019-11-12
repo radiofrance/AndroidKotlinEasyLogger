@@ -1,0 +1,35 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion configCompileSdkVersion
+
+    defaultConfig {
+        minSdkVersion configMinSdkVersion
+        targetSdkVersion configTargetSdkVersion
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    android.variantFilter { variant ->
+        variant.setIgnore(variant.buildType.name != 'release')
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+        }
+    }
+}
+
+dependencies {
+    api project(':logger')
+
+    testImplementation project(':test-utils-data')
+    testImplementation project(':test-utils-stream')
+    testImplementation buildDependencies.kotlin
+    testImplementation testDependencies.junit
+    testImplementation testDependencies.robolectric
+}

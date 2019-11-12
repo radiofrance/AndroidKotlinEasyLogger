@@ -1,15 +1,14 @@
 apply plugin: 'com.android.application'
-
 apply plugin: 'kotlin-android'
-
 apply plugin: 'kotlin-android-extensions'
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion configCompileSdkVersion
     defaultConfig {
         applicationId "com.radiofrance.logger.demo"
-        minSdkVersion 17
-        targetSdkVersion 29
+
+        minSdkVersion configMinSdkVersion
+        targetSdkVersion configTargetSdkVersion
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -19,11 +18,23 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+        debug {
+            debuggable true
+            minifyEnabled false
+            matchingFallbacks = ['release']
+        }
     }
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation project(':logger')
+    implementation buildDependencies.kotlin
+    implementation buildDependencies.androidxAppcompat
+
+    //implementation project(':log-noop')
+
+    implementation project(':log-verbose')
+    //implementation project(':log-debug')
+    //implementation project(':log-info')
+    //implementation project(':log-warning')
+    //implementation project(':log-error')
 }
