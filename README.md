@@ -102,3 +102,12 @@ class MainActivity : AppCompatActivity() {
    
 }
 ```
+
+Unit Tests
+--------
+
+Run all levels test
+
+```renderscript
+> ./gradlew runAllTests
+```
