@@ -5,11 +5,12 @@ import android.util.Log
 
 val LOG_TAG_MAX_LENGTH = if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.N) 23 else 100
 const val DEFAULT_TAG = "DefaultLogTag"
+const val DEFAULT_MESSAGE = " "
 
 internal fun makeLogTag(stackTrace: Array<StackTraceElement>? = Thread.currentThread().stackTrace) =
     stackTrace
         ?.firstOrNull { it.fileName != "VMStack.java" && it.fileName != "Thread.java" && it.fileName != "LogInline.kt"}
-        ?.let { stack -> "${stack.className.split(".").last().split("$").first()}::${stack.methodName}:" }
+        ?.let { stack -> "${stack.className.split(".").last().split("$").first()}::${stack.methodName}" }
         ?.take(LOG_TAG_MAX_LENGTH)
         ?: DEFAULT_TAG
 
@@ -18,7 +19,7 @@ internal fun makeLogTag(stackTrace: Array<StackTraceElement>? = Thread.currentTh
  *
  * @param msg The message you would like logged.
  */
-fun logv(msg: String? = ":") = log(Log.VERBOSE, null, msg, null)
+fun logv(msg: String? = DEFAULT_MESSAGE) = log(Log.VERBOSE, null, msg, null)
 
 /**
  * Send a [.VERBOSE] log message.
@@ -50,7 +51,7 @@ fun logv(tag: String, msg: String, tr: Throwable) = log(Log.VERBOSE, tag, msg, t
  *
  * @param msg The message you would like logged.
  */
-fun logd(msg: String? = ":") = log(Log.DEBUG, null, msg, null)
+fun logd(msg: String? = DEFAULT_MESSAGE) = log(Log.DEBUG, null, msg, null)
 
 /**
  * Send a [.DEBUG] log message.
@@ -82,7 +83,7 @@ fun logd(tag: String, msg: String, tr: Throwable) = log(Log.DEBUG, tag, msg, tr)
  *
  * @param msg The message you would like logged.
  */
-fun logi(msg: String? = ":") = log(Log.INFO, null, msg, null)
+fun logi(msg: String? = DEFAULT_MESSAGE) = log(Log.INFO, null, msg, null)
 
 /**
  * Send a [.INFO] log message.
@@ -114,7 +115,7 @@ fun logi(tag: String, msg: String, tr: Throwable) = log(Log.INFO, tag, msg, tr)
  *
  * @param msg The message you would like logged.
  */
-fun logw(msg: String? = ":") = log(Log.WARN, null, msg, null)
+fun logw(msg: String? = DEFAULT_MESSAGE) = log(Log.WARN, null, msg, null)
 
 /**
  * Send a [.WARN] log message.
@@ -146,7 +147,7 @@ fun logw(tag: String, msg: String, tr: Throwable) = log(Log.WARN, tag, msg, tr)
  *
  * @param msg The message you would like logged.
  */
-fun loge(msg: String? = ":") = log(Log.ERROR, null, msg, null)
+fun loge(msg: String? = DEFAULT_MESSAGE) = log(Log.ERROR, null, msg, null)
 
 /**
  * Send a [.ERROR] log message.
@@ -181,7 +182,7 @@ fun loge(tag: String, msg: String, tr: Throwable) = log(Log.ERROR, tag, msg, tr)
  * @param msg The message you would like logged.
  * @param tr An exception to log
  */
-private fun log(level: Int, tag: String?, msg: String? = ":", tr: Throwable?): Int {
+private fun log(level: Int, tag: String?, msg: String? = DEFAULT_MESSAGE, tr: Throwable?): Int {
     if (level < LogConfig.getLevel()) {
         return -1
     }

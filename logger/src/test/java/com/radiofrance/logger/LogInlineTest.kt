@@ -76,7 +76,7 @@ class LogInlineTest {
         val tag = makeLogTag(stackTraceElements)
 
         // Then
-        assertEquals("MainActivity::methodName:", tag)
+        assertEquals("MainActivity::methodName", tag)
     }
     @Test
     fun `makeLogTag returning automatic tag on stacktrace with encapsuled class`() {
@@ -106,7 +106,7 @@ class LogInlineTest {
         val tag = makeLogTag(stackTraceElements)
 
         // Then
-        assertEquals("MainActivity::methodName:", tag)
+        assertEquals("MainActivity::methodName", tag)
     }
 
 }

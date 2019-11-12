@@ -18,7 +18,7 @@ data class LogTestData(
 
     object Builder {
 
-        private const val AUTOMATIC_TAG = "LogTestData::invoke:"
+        private const val AUTOMATIC_TAG = "LogTestData::invoke"
 
         fun build() = listOf(
             arrayOf(

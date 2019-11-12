@@ -15,7 +15,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         logv()
-        // Logcat output : "V/MainActivity::onCreate:: :"
+        // Logcat output : "V/MainActivity::onCreate:: "
 
         logv("logv with message")
         // Logcat output : "V/MainActivity::onCreate:: logv with message"

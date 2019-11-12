@@ -39,7 +39,7 @@ class LogInlineTestAndroidN {
         val tag = makeLogTag(stackTraceElements)
 
         // Then
-        assertEquals("MainActivity::methodName:".take(LOG_TAG_MAX_LENGTH), tag)
+        assertEquals("MainActivity::methodName".take(LOG_TAG_MAX_LENGTH), tag)
     }
 
 }
