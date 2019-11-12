@@ -15,16 +15,16 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         logv()
-        // Logcat output : "V/MainActivity::onCreate:: "
+        // Logcat output : "V/MainActivity::onCreate: "
 
         logv("logv with message")
-        // Logcat output : "V/MainActivity::onCreate:: logv with message"
+        // Logcat output : "V/MainActivity::onCreate: logv with message"
 
         logv("LOG_TAG", "logv with makeLogTag and message")
         // Logcat output : "V/LOG_TAG: logv with makeLogTag and message"
 
         logv("logv message and exception", Exception("Exception message"))
-        // Logcat output : "V/MainActivity::onCreate:: logv message and exception
+        // Logcat output : "V/MainActivity::onCreate: logv message and exception
         //    java.lang.Exception: Exception message
         //        at com.radiofrance.logger.demo.MainActivity.onCreate(MainActivity.kt:20)
         //        at android.app.Activity.performCreate(Activity.java:6679)
@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
         //        at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:2618)"
 
         logv("LOG_TAG", "logv with makeLogTag, message and exception", Exception("Exception message"))
-        // Logcat output : "V/LOG_TAG:: logv message and exception
+        // Logcat output : "V/LOG_TAG: logv message and exception
         //    java.lang.Exception: Exception message
         //        at com.radiofrance.logger.demo.MainActivity.onCreate(MainActivity.kt:20)
         //        at android.app.Activity.performCreate(Activity.java:6679)
