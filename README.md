@@ -1,4 +1,4 @@
-Android Kotlin Easy Logger
+Android Kotlin Easy Logger  📝
 ===
 
 Easy Logger is a library that provide Kotlin extensions for Android logging.
