@@ -15,6 +15,11 @@ android {
     android.variantFilter { variant ->
         variant.setIgnore(variant.buildType.name != 'release')
     }
+
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
 }
 
 dependencies {

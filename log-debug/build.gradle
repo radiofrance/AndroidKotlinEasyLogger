@@ -1,6 +1,17 @@
+apply plugin: 'com.novoda.bintray-release'
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+
+publish {
+    userOrg publishUserOrg
+    repoName publishRepoName
+    groupId publishGroupId
+    artifactId 'log-debug'
+    publishVersion publishLibVersion
+    desc publishDesc
+    website publishWebsite
+}
 
 android {
     compileSdkVersion configCompileSdkVersion
@@ -21,6 +32,11 @@ android {
         release {
             minifyEnabled false
         }
+    }
+
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
     }
 }
 

@@ -16,6 +16,11 @@ android {
         variant.setIgnore(variant.buildType.name != 'release')
     }
     android.defaultConfig.javaCompileOptions.annotationProcessorOptions.includeCompileClasspath = true
+
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
 }
 
 dependencies {

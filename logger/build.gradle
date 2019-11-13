@@ -23,6 +23,11 @@ android {
         }
     }
 
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+
     sourceSets {
         main {
             java {
