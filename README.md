@@ -11,29 +11,37 @@ If is not specified, Log tag is automatically generated with name of the class a
 Download
 --------
 
+*`build.gradle` configuration file :*
+
+```gradle
+repositories {
+    jcenter()
+}
+```
+
 ```gradle
 dependencies {
   
     // Choose log level with matching dependency
-    implementation 'com.radiofrance.logger:log-noop:x.x.x'
-    implementation 'com.radiofrance.logger:log-verbose:x.x.x'
-    implementation 'com.radiofrance.logger:log-debug:x.x.x'
-    implementation 'com.radiofrance.logger:log-info:x.x.x'
-    implementation 'com.radiofrance.logger:log-warning:x.x.x'
-    implementation 'com.radiofrance.logger:log-error:x.x.x'
+    implementation 'com.radiofrance.android:log-noop:x.x.x'
+    implementation 'com.radiofrance.android:log-verbose:x.x.x'
+    implementation 'com.radiofrance.android:log-debug:x.x.x'
+    implementation 'com.radiofrance.android:log-info:x.x.x'
+    implementation 'com.radiofrance.android:log-warning:x.x.x'
+    implementation 'com.radiofrance.android:log-error:x.x.x'
   
 }
 ```
 
-*Exemple* 
+*Example :* 
 - `No Operation` for `Release` variant
 - `Verbose` for `Debug` variant.
 
 ```gradle
 dependencies {
   
-    releaseImplementation 'com.radiofrance.logger:log-noop:x.x.x'
-    debugImplementation 'com.radiofrance.logger:log-verbose:x.x.x'
+    releaseImplementation 'com.radiofrance.android:log-noop:x.x.x'
+    debugImplementation 'com.radiofrance.android:log-verbose:x.x.x'
   
 }
 ```

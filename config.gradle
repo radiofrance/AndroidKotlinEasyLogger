@@ -15,7 +15,7 @@ ext {
 
     publishUserOrg = 'devmobileradiofrance'
     publishRepoName = 'android'
-    publishGroupId = 'com.radiofrance.logger'
+    publishGroupId = 'com.radiofrance.android'
     publishLibVersion = '1.0.0'
     publishDesc = 'Easy Logger is a library that provide Kotlin extensions for Android logging.'
     publishWebsite = 'https://github.com/radiofrance/AndroidKotlinEasyLogger'
