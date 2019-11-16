@@ -25,4 +25,4 @@ task clean(type: Delete) {
     delete rootProject.buildDir
 }
 
-task runAllTests(dependsOn: ['logger:test', 'log-verbose:test', 'log-debug:test', 'log-info:test', 'log-warning:test', 'log-error:test', 'log-noop:test'])
+task runAllTests(dependsOn: ['log-verbose:test', 'log-debug:test', 'log-info:test', 'log-warning:test', 'log-error:test', 'log-noop:test'])

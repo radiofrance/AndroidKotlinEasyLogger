@@ -3,16 +3,16 @@ package com.radiofrance.logger
 import android.os.Build
 import android.util.Log
 
-val LOG_TAG_MAX_LENGTH = if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.N) 23 else 100
+private val LOG_TAG_MAX_LENGTH = if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.N) 23 else 100
 const val DEFAULT_TAG = "DefaultLogTag"
 const val DEFAULT_MESSAGE = " "
 
-internal fun makeLogTag(stackTrace: Array<StackTraceElement>? = Thread.currentThread().stackTrace) =
+internal fun makeLogTag(stackTrace: Array<StackTraceElement>? = Thread.currentThread().stackTrace, defaultTag: String = DEFAULT_TAG) =
     stackTrace
         ?.firstOrNull { it.fileName != "VMStack.java" && it.fileName != "Thread.java" && it.fileName != "LogInline.kt"}
         ?.let { stack -> "${stack.className.split(".").last().split("$").first()}::${stack.methodName}" }
         ?.take(LOG_TAG_MAX_LENGTH)
-        ?: DEFAULT_TAG
+        ?: defaultTag
 
 /**
  * Send a [.VERBOSE] log message.
@@ -183,9 +183,6 @@ fun loge(tag: String, msg: String, tr: Throwable) = log(Log.ERROR, tag, msg, tr)
  * @param tr An exception to log
  */
 private fun log(level: Int, tag: String?, msg: String? = DEFAULT_MESSAGE, tr: Throwable?): Int {
-    if (level < LogConfig.getLevel()) {
-        return -1
-    }
     val tagNonNull = tag ?: makeLogTag()
     return when (level) {
         Log.VERBOSE -> Log.v(tagNonNull, msg, tr)

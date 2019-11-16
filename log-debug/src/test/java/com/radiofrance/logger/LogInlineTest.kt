@@ -1,6 +1,7 @@
 package com.radiofrance.logger
 
 import android.os.Build
+import android.util.Log
 import com.radiofrance.logger.test.utils.data.LogTestData
 import com.radiofrance.logger.test.utils.stream.assertMessageIsLogged
 import com.radiofrance.logger.test.utils.stream.assertMessageIsNotLogged
@@ -18,7 +19,7 @@ class LogInlineTest(private val testData: LogTestData) {
     companion object {
         @JvmStatic
         @ParameterizedRobolectricTestRunner.Parameters(name = "{index}: {0}")
-        fun getParameters() = LogTestData.Builder.build()
+        fun getParameters() = LogTestData.TEST_PARAMS
     }
 
     @Test
@@ -28,7 +29,7 @@ class LogInlineTest(private val testData: LogTestData) {
             invokeToOutputStrem(logExecution).let { outputStream ->
                 // Then
                 messages.forEach {
-                    if (level >= LogConfig.getLevel()) {
+                    if (level >= Log.DEBUG) {
                         outputStream.assertMessageIsLogged(it)
                     } else {
                         outputStream.assertMessageIsNotLogged(it)

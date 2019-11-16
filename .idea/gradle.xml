@@ -15,7 +15,6 @@
             <option value="$PROJECT_DIR$/log-noop" />
             <option value="$PROJECT_DIR$/log-verbose" />
             <option value="$PROJECT_DIR$/log-warning" />
-            <option value="$PROJECT_DIR$/logger" />
             <option value="$PROJECT_DIR$/test-utils-data" />
             <option value="$PROJECT_DIR$/test-utils-stream" />
           </set>

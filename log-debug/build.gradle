@@ -38,11 +38,10 @@ android {
         checkReleaseBuilds false
         abortOnError false
     }
+
 }
 
 dependencies {
-    api project(':logger')
-
     testImplementation project(':test-utils-data')
     testImplementation project(':test-utils-stream')
     testImplementation buildDependencies.kotlin

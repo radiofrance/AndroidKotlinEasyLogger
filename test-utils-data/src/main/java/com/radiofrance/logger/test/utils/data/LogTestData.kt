@@ -15,12 +15,12 @@ data class LogTestData(
 ) {
 
     override fun toString() = name
-
-    object Builder {
+    
+    companion object {
 
         private const val AUTOMATIC_TAG = "LogTestData::invoke"
 
-        fun build() = listOf(
+        val TEST_PARAMS = listOf(
             arrayOf(
                 LogTestData(
                     name = "Test logv method with no message and no tag specified",
@@ -222,6 +222,7 @@ data class LogTestData(
                 )
             )
         )
+        
     }
 
 }

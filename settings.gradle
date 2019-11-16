@@ -1,2 +1,2 @@
-include ':app-demo', ':logger', ':log-verbose', ':log-debug', ':test-utils-data', ':test-utils-stream', ':log-noop', ':log-info', ':log-warning', ':log-error'
+include ':app-demo', ':log-verbose', ':log-debug', ':test-utils-data', ':test-utils-stream', ':log-noop', ':log-info', ':log-warning', ':log-error'
 rootProject.name='Logger'
