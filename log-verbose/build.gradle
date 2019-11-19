@@ -1,16 +1,10 @@
-apply plugin: 'com.novoda.bintray-release'
+apply from: '../publish.gradle'
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 publish {
-    userOrg publishUserOrg
-    repoName publishRepoName
-    groupId publishGroupId
     artifactId 'log-verbose'
-    publishVersion publishLibVersion
-    desc publishDesc
-    website publishWebsite
 }
 
 android {

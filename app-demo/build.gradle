@@ -32,9 +32,9 @@ dependencies {
 
     //implementation project(':log-noop')
 
-    implementation project(':log-verbose')
+    //implementation project(':log-verbose')
     //implementation project(':log-debug')
-    //implementation project(':log-info')
+    implementation project(':log-info')
     //implementation project(':log-warning')
     //implementation project(':log-error')
 }

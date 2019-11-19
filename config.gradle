@@ -13,10 +13,10 @@ ext {
             robolectric            : 'org.robolectric:robolectric:4.3',
     ]
 
+    publishLibVersion = '1.0.1'
     publishUserOrg = 'devmobileradiofrance'
     publishRepoName = 'android'
     publishGroupId = 'com.radiofrance.android'
-    publishLibVersion = '1.0.1'
     publishDesc = 'Easy Logger is a library that provide Kotlin extensions for Android logging.'
     publishWebsite = 'https://github.com/radiofrance/AndroidKotlinEasyLogger'
 }
