@@ -107,6 +107,34 @@ data class LogTagTestData(
                     expectedLogTag = "MainActivity::onCreate",
                     expectedLogTagOnAndroidLowerThanO = "MainActivity::onCreate".take(TAG_SIZE_MAX_ON_ANDROID_LOWER_THAN_O)
                 )
+            ),
+            arrayOf(
+                LogTagTestData(
+                    name = "Test correct tag on stacktrace with inner class name and method name",
+                    stacktrace = arrayOf(
+                        StackTraceElement(
+                            "dalvik.system.VMStack",
+                            "getThreadStackTrace",
+                            "VMStack.java",
+                            0
+                        ),
+                        StackTraceElement(
+                            "java.lang.Thread",
+                            "getStackTrace",
+                            "Thread.java",
+                            1555
+                        ),
+                        StackTraceElement(
+                            "com.radiofrance.echoes.core.domain.player.PlayerDomain\$AutoRefreshInfoDataHandler",
+                            "reset",
+                            "PlayerDomain.kt",
+                            605
+                        )
+                    ),
+                    defaultTag = DEFAULT_TAG,
+                    expectedLogTag = "PlayerDomain::AutoRefreshInfoDataHandler::reset",
+                    expectedLogTagOnAndroidLowerThanO = "PlayerDomain::AutoRefreshInfoDataHandler::reset".take(TAG_SIZE_MAX_ON_ANDROID_LOWER_THAN_O)
+                )
             )
         )
     }

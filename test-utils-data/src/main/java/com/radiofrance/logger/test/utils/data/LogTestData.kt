@@ -18,7 +18,11 @@ data class LogTestData(
     
     companion object {
 
-        private const val AUTOMATIC_TAG = "LogTestData::invoke"
+        private const val CLASS_NAME_TAG = "LogTestData"
+
+        private fun testMethodWithLogV() {
+            logv()
+        }
 
         val TEST_PARAMS = listOf(
             arrayOf(
@@ -26,7 +30,15 @@ data class LogTestData(
                     name = "Test logv method with no message and no tag specified",
                     level = Log.VERBOSE,
                     logExecution = { logv() },
-                    messages = arrayOf("V/$AUTOMATIC_TAG:")
+                    messages = arrayOf("V/$CLASS_NAME_TAG:")
+                )
+            ),
+            arrayOf(
+                LogTestData(
+                    name = "Test logv method with no message and no tag specified, in a specific method",
+                    level = Log.VERBOSE,
+                    logExecution = { testMethodWithLogV() },
+                    messages = arrayOf("V/$CLASS_NAME_TAG::testMethodWithLogV:")
                 )
             ),
             arrayOf(
@@ -34,7 +46,7 @@ data class LogTestData(
                     name = "Test logv method with message and no tag specified",
                     level = Log.VERBOSE,
                     logExecution = { logv("This is a verbose message.") },
-                    messages = arrayOf("V/$AUTOMATIC_TAG: This is a verbose message.")
+                    messages = arrayOf("V/$CLASS_NAME_TAG: This is a verbose message.")
                 )
             ),
             arrayOf(
@@ -50,7 +62,7 @@ data class LogTestData(
                     name = "Test logv method with message, an exception and no tag specified",
                     level = Log.VERBOSE,
                     logExecution = { logv("This is a verbose message.", Exception("This a test exception")) },
-                    messages = arrayOf("V/$AUTOMATIC_TAG: This is a verbose message.", "java.lang.Exception: This a test exception")
+                    messages = arrayOf("V/$CLASS_NAME_TAG: This is a verbose message.", "java.lang.Exception: This a test exception")
                 )
             ),
             arrayOf(
@@ -66,7 +78,7 @@ data class LogTestData(
                     name = "Test logd method with no message and no tag specified",
                     level = Log.DEBUG,
                     logExecution = { logd() },
-                    messages = arrayOf("D/$AUTOMATIC_TAG:")
+                    messages = arrayOf("D/$CLASS_NAME_TAG:")
                 )
             ),
             arrayOf(
@@ -74,7 +86,7 @@ data class LogTestData(
                     name = "Test logd method with message and no tag specified",
                     level = Log.DEBUG,
                     logExecution = { logd("This is a debug message.") },
-                    messages = arrayOf("D/$AUTOMATIC_TAG: This is a debug message.")
+                    messages = arrayOf("D/$CLASS_NAME_TAG: This is a debug message.")
                 )
             ),
             arrayOf(
@@ -90,7 +102,7 @@ data class LogTestData(
                     name = "Test logd method with message, an exception and no tag specified",
                     level = Log.DEBUG,
                     logExecution = { logd("This is a debug message.", Exception("This a test exception")) },
-                    messages = arrayOf("D/$AUTOMATIC_TAG: This is a debug message.", "java.lang.Exception: This a test exception")
+                    messages = arrayOf("D/$CLASS_NAME_TAG: This is a debug message.", "java.lang.Exception: This a test exception")
                 )
             ),
             arrayOf(
@@ -106,7 +118,7 @@ data class LogTestData(
                     name = "Test logi method with no message and no tag specified",
                     level = Log.INFO,
                     logExecution = { logi() },
-                    messages = arrayOf("I/$AUTOMATIC_TAG:")
+                    messages = arrayOf("I/$CLASS_NAME_TAG:")
                 )
             ),
             arrayOf(
@@ -114,7 +126,7 @@ data class LogTestData(
                     name = "Test logi method with message and no tag specified",
                     level = Log.INFO,
                     logExecution = { logi("This is a info message.") },
-                    messages = arrayOf("I/$AUTOMATIC_TAG: This is a info message.")
+                    messages = arrayOf("I/$CLASS_NAME_TAG: This is a info message.")
                 )
             ),
             arrayOf(
@@ -130,7 +142,7 @@ data class LogTestData(
                     name = "Test logi method with message, an exception and no tag specified",
                     level = Log.INFO,
                     logExecution = { logi("This is a info message.", Exception("This a test exception")) },
-                    messages = arrayOf("I/$AUTOMATIC_TAG: This is a info message.", "java.lang.Exception: This a test exception")
+                    messages = arrayOf("I/$CLASS_NAME_TAG: This is a info message.", "java.lang.Exception: This a test exception")
                 )
             ),
             arrayOf(
@@ -146,7 +158,7 @@ data class LogTestData(
                     name = "Test logw method with no message and no tag specified",
                     level = Log.WARN,
                     logExecution = { logw() },
-                    messages = arrayOf("W/$AUTOMATIC_TAG:")
+                    messages = arrayOf("W/$CLASS_NAME_TAG:")
                 )
             ),
             arrayOf(
@@ -154,7 +166,7 @@ data class LogTestData(
                     name = "Test logw method with message and no tag specified",
                     level = Log.WARN,
                     logExecution = { logw("This is a warn message.") },
-                    messages = arrayOf("W/$AUTOMATIC_TAG: This is a warn message.")
+                    messages = arrayOf("W/$CLASS_NAME_TAG: This is a warn message.")
                 )
             ),
             arrayOf(
@@ -170,7 +182,7 @@ data class LogTestData(
                     name = "Test logw method with message, an exception and no tag specified",
                     level = Log.WARN,
                     logExecution = { logw("This is a warn message.", Exception("This a test exception")) },
-                    messages = arrayOf("W/$AUTOMATIC_TAG: This is a warn message.", "java.lang.Exception: This a test exception")
+                    messages = arrayOf("W/$CLASS_NAME_TAG: This is a warn message.", "java.lang.Exception: This a test exception")
                 )
             ),
             arrayOf(
@@ -186,7 +198,7 @@ data class LogTestData(
                     name = "Test loge method with no message and no tag specified",
                     level = Log.ERROR,
                     logExecution = { loge() },
-                    messages = arrayOf("E/$AUTOMATIC_TAG:")
+                    messages = arrayOf("E/$CLASS_NAME_TAG:")
                 )
             ),
             arrayOf(
@@ -194,7 +206,7 @@ data class LogTestData(
                     name = "Test loge method with message and no tag specified",
                     level = Log.ERROR,
                     logExecution = { loge("This is a error message.") },
-                    messages = arrayOf("E/$AUTOMATIC_TAG: This is a error message.")
+                    messages = arrayOf("E/$CLASS_NAME_TAG: This is a error message.")
                 )
             ),
             arrayOf(
@@ -210,7 +222,7 @@ data class LogTestData(
                     name = "Test loge method with message, an exception and no tag specified",
                     level = Log.ERROR,
                     logExecution = { loge("This is a error message.", Exception("This a test exception")) },
-                    messages = arrayOf("E/$AUTOMATIC_TAG: This is a error message.", "java.lang.Exception: This a test exception")
+                    messages = arrayOf("E/$CLASS_NAME_TAG: This is a error message.", "java.lang.Exception: This a test exception")
                 )
             ),
             arrayOf(

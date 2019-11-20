@@ -9,8 +9,11 @@ const val DEFAULT_MESSAGE = " "
 
 internal fun makeLogTag(stackTrace: Array<StackTraceElement>? = Thread.currentThread().stackTrace, defaultTag: String = DEFAULT_TAG) =
     stackTrace
-        ?.firstOrNull { it.fileName != "VMStack.java" && it.fileName != "Thread.java" && it.fileName != "LogInline.kt"}
-        ?.let { stack -> "${stack.className.split(".").last().split("$").first()}::${stack.methodName}" }
+        ?.firstOrNull { it.fileName != "VMStack.java" && it.fileName != "Thread.java" && it.fileName != "LogInline.kt" }
+        ?.let { stack ->
+            stack.className.split(".").last().split("\$Companion").first().replace("$", "::") +
+                    (stack.methodName.takeIf { it != "invoke" }?.let { "::$it" } ?: "")
+        }
         ?.take(LOG_TAG_MAX_LENGTH)
         ?: defaultTag
 
