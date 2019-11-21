@@ -11,7 +11,7 @@ internal fun makeLogTag(stackTrace: Array<StackTraceElement>? = Thread.currentTh
     stackTrace
         ?.firstOrNull { it.fileName != "VMStack.java" && it.fileName != "Thread.java" && it.fileName != "LogInline.kt" }
         ?.let { stack ->
-            stack.className.split(".").last().split("\$Companion").first().replace("$", "::") +
+            stack.className.split(".").last().split("\$Companion").first().split("$").filter { it.toIntOrNull() == null }.joinToString("::") +
                     (stack.methodName.takeIf { it != "invoke" }?.let { "::$it" } ?: "")
         }
         ?.take(LOG_TAG_MAX_LENGTH)

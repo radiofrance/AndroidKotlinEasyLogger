@@ -1,6 +1,10 @@
 # CHANGELOG
 
 
+## Version 1.0.4 (2019-11-21)
+
+Remove numeric values in class Name on anonymous classes.
+
 ## Version 1.0.3 (2019-11-20)
 
 Remove method name in automatic tag if equals to "invoke".
